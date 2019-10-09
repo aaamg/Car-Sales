@@ -6,24 +6,29 @@ import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
 import { addFeature, removeFeature } from './actions'
 
-const App = (state, changers) => {
+const App = (state) => {
+
+  //console.log(changers)
+  //console.log(state)
 
   const removeFeature = item => {
     // dispatch an action here to remove an item
+    state.removeFeature(item)
   };
 
   const buyItem = item => {
     // dipsatch an action here to add an item
+    state.addFeature(item)
   };
 
   return (
     <div className="boxes">
       <div className="box">
         <Header car={state.car} />
-        <AddedFeatures car={state.car} />
+        <AddedFeatures car={state.car} removeFeature={removeFeature} />
       </div>
       <div className="box">
-        <AdditionalFeatures store={state.store} />
+        <AdditionalFeatures store={state.store} addFeature={buyItem}/>
         <Total car={state.car} additionalPrice={state.additionalPrice} />
       </div>
     </div>
